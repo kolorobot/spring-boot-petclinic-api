@@ -31,8 +31,11 @@
 package sample.petclinic.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import sample.petclinic.model.Owner;
 
-public interface OwnerRepository extends PagingAndSortingRepository<Owner, Integer> {
+import java.util.List;
 
+public interface OwnerRepository extends PagingAndSortingRepository<Owner, Integer> {
+    List<Owner> findBylastName(@Param("lastName") String lastName);
 }

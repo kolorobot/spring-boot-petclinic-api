@@ -15,27 +15,13 @@
  */
 package sample.petclinic.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Simple business object representing a pet.
@@ -58,7 +44,7 @@ public class Pet extends NamedEntity {
     @JoinColumn(name = "type_id")
     private PetType type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, optional = true) // as defined in schema
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
@@ -89,5 +75,4 @@ public class Pet extends NamedEntity {
     public Owner getOwner() {
         return this.owner;
     }
-
 }

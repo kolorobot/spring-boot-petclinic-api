@@ -15,23 +15,12 @@
  */
 package sample.petclinic.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
+
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import java.util.Set;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -57,9 +46,12 @@ public class Owner extends Person {
     @Digits(fraction = 0, integer = 10)
     private String telephone;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Pet> pets;
 
+    public Set<Pet> getPets() {
+        return pets;
+    }
 
     public String getAddress() {
         return this.address;
