@@ -15,12 +15,10 @@
  */
 package sample.petclinic.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -35,10 +33,10 @@ import java.util.Set;
 public class Pet extends NamedEntity {
 
     @Column(name = "birth_date")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    // @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    @JsonFormat(pattern = "yyyy/MM/dd")
-    private DateTime birthDate;
+    // @JsonFormat(pattern = "yyyy/MM/dd")
+    private LocalDate birthDate;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
@@ -52,11 +50,11 @@ public class Pet extends NamedEntity {
     private Set<Visit> visits;
 
 
-    public void setBirthDate(DateTime birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public DateTime getBirthDate() {
+    public LocalDate getBirthDate() {
         return this.birthDate;
     }
 

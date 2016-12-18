@@ -15,22 +15,8 @@
  */
 package sample.petclinic.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import javax.persistence.*;
 import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
 
 /**
  * Simple JavaBean domain object representing a veterinarian.
@@ -41,7 +27,10 @@ import org.springframework.beans.support.PropertyComparator;
  * @author Arjen Poutsma
  */
 @Entity
-@Table(name = "vets")
+@Table(name = "vets",
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"first_name", "last_name"})
+)
 public class Vet extends Person {
 
     @ManyToMany(fetch = FetchType.EAGER)

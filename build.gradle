@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.1.7.RELEASE'
+        springBootVersion = '1.4.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -11,9 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse-wtp'
-apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
 apply plugin: 'war'
 
 
@@ -37,22 +35,14 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
-    compile("org.hsqldb:hsqldb:2.3.2")
-    /* Required to make use of JODA  */
-    compile("joda-time:joda-time:2.4")
-    compile("org.jadira.usertype:usertype.jodatime:2.0.1")
-    compile("com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.2");
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    compile("org.hsqldb:hsqldb")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-}
-
-eclipse {
-    classpath {
-         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-    }
+    /* JUnitParams for parameterized tests */
+    testCompile "pl.pragmatists:JUnitParams:1.0.5"
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
+    gradleVersion = '2.13'
 }
