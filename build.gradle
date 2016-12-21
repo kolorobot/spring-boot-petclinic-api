@@ -43,6 +43,12 @@ dependencies {
     testCompile "pl.pragmatists:JUnitParams:1.0.5"
 }
 
+bootRun {
+    // It is for running application with profiles
+    // e.g. gradle bootRun -Dspring.profiles.active=h2,dev
+    systemProperties = System.properties
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
 }
