@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.4.2.RELEASE'
+        springBootVersion = '1.5.6.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -40,7 +40,7 @@ dependencies {
     compile("org.hsqldb:hsqldb")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     /* JUnitParams for parameterized tests */
-    testCompile "pl.pragmatists:JUnitParams:1.0.5"
+    testCompile "pl.pragmatists:JUnitParams:1.0.6"
 }
 
 bootRun {
@@ -50,5 +50,5 @@ bootRun {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
+    gradleVersion = '4.1'
 }
